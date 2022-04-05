@@ -45,7 +45,7 @@ BEGIN
 
 	disp_uni : disp7
 	PORT MAP(dec => uni,
-	disp => hex0);
+	disp => hex2);
 
 	disp_dez : disp7
 	PORT MAP(dec => dez,
@@ -53,6 +53,6 @@ BEGIN
 
 	disp_cent : disp7
 	PORT MAP (dec => cent,
-	disp => hex2);
+	disp => hex0);
 
 END contagem;
