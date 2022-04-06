@@ -1,13 +1,13 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use std.textio.all;
-use ieee.numeric_std.all;
+--use IEEE.numeric_std.all;
 
 
 ENTITY testbench2 is
 END testbench2;
 
-ARCHITECTURE Behavioral OF testbench2 IS
+ARCHITECTURE behavioral OF testbench2 IS
 	COMPONENT contador99 
 		PORT 
 		(
@@ -42,14 +42,14 @@ BEGIN
 
 inst : contador99 PORT MAP (
 	ck => ck,
-	hex0 => hex0,
-	hex1 => hex1,
-	hex2 => hex2
+	hex0 => hex0
+--	disp => hex1,
+--	disp => hex2
 );
 
 
 salva_dados : PROCESS(ck)
-	file arquivo : text open write_mode is "/home/demo/saida.dat";
+	file arquivo : text open write_mode is "/home/pc-csic-06/saida.dat";
 	variable linha : line;
 	--variable dado : string(1 to 4);
 	BEGIN

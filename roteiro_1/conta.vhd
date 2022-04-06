@@ -1,6 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
-USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+USE IEEE.MATH_REAL.ALL;
 
 ENTITY conta IS
 	PORT ( ckin : IN STD_LOGIC;
@@ -17,8 +18,8 @@ BEGIN
 	PROCESS (ckin)
 	BEGIN
 		IF ckin'EVENT and ckin = '0' THEN
-		IF vcont_s /= 9 THEN
-			vcont_s <= vcont_s + 1;
+		IF vcont_s /= 1001 THEN
+			vcont_s <= std_logic_vector(unsigned(vcont_s) + 1);
 			ckout_s <= '1';
 		ELSE
 			vcont_s <= "0000";
