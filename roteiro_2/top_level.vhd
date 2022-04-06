@@ -17,7 +17,7 @@ entity top_level is
 end top_level;
 
 architecture comportamento of top_level is
-	
+
 	component somador
 	generic(
 		nbits: integer := 4
@@ -148,5 +148,5 @@ architecture comportamento of top_level is
 			clk => clk,
 			resultado_final => resultado_final,
 			saida => saida
-		);		
+		);	
 end comportamento;
