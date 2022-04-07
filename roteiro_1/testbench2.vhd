@@ -20,42 +20,45 @@ ARCHITECTURE behavioral OF testbench2 IS
 
 -- input
 SIGNAL ck : STD_LOGIC := '0';
-CONSTANT clk_period : TIME := 20 ns;
+CONSTANT clk_period : TIME := 1 ms;
 -- output
 SIGNAL hex0 :  STD_LOGIC_VECTOR(6 DOWNTO 0);
 SIGNAL hex1 :  STD_LOGIC_VECTOR(6 DOWNTO 0);
 SIGNAL hex2 :  STD_LOGIC_VECTOR(6 DOWNTO 0);
 
---FUNCTION decoder(i : IN STD_LOGIC_VECTOR(6 DOWNTO 0) := "0000000")
---	return string is
---	VARIABLE output : string(1 to 4);
---BEGIN
---		output := to_string(i);
---		WHEN "1111110" => output := "0x01";
---		WHEN "1001111" => output := "0x4F";
---		WHEN "0100100" => output := "0x12";
---		WHEN others => output := "0xXX";
---	return output;
---END FUNCTION;
+FUNCTION decoder(i : IN STD_LOGIC_VECTOR(6 DOWNTO 0) := "0000000")
+	return string is
+	VARIABLE output : string(1 to 4);
+BEGIN
+	CASE i IS
+		WHEN "1111110" => output := "0x01";
+		WHEN "0110000" => output := "0x4F";
+		WHEN "1101101" => output := "0x12";
+		WHEN others => output := "0xXX";
+		return output;
+	END CASE;
+	return output;
+END FUNCTION;
 
 BEGIN
 
 inst : contador99 PORT MAP (
 	ck => ck,
-	hex0 => hex0
---	disp => hex1,
---	disp => hex2
+	hex0 => hex0,
+	hex1 => hex1,
+	hex2 => hex2
 );
 
 
 salva_dados : PROCESS(ck)
-	file arquivo : text open write_mode is "/home/pc-csic-06/saida.dat";
+	file arquivo : text open write_mode is "/home/demo/saida.dat";
 	variable linha : line;
-	--variable dado : string(1 to 4);
+	variable dado : string(1 to 4);
 	BEGIN
 		IF FALLING_EDGE(ck) THEN
-			--dado := decoder(hex0);
-			hwrite(linha, hex0);
+			dado := decoder(hex2);
+			write(linha, dado);
+			hwrite(linha, hex2); -- Use for debug
 			writeline(arquivo, linha);
 		END IF;
 	END PROCESS;

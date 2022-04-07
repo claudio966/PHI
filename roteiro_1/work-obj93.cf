@@ -1,0 +1,7 @@
+v 4
+file . "disp7.vhd" "3c993c2bbb69f3bb467be840104946ca9a786024" "20220407012015.677":
+  entity disp7 at 1( 0) + 0 on 13;
+  architecture decod of disp7 at 8( 161) + 0 on 14;
+file . "conta.vhd" "46aa56ecf132138614654f91dc3160cd931c7c4f" "20220407011818.683":
+  entity conta at 1( 0) + 0 on 11;
+  architecture soma of conta at 12( 220) + 0 on 12;
