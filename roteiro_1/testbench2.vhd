@@ -55,7 +55,7 @@ salva_dados : PROCESS(ck)
 	variable linha : line;
 	variable dado : string(1 to 4);
 	BEGIN
-		IF FALLING_EDGE(ck) THEN
+		IF RISING_EDGE(ck) THEN
 			dado := decoder(hex2);
 			write(linha, dado);
 			hwrite(linha, hex2); -- Use for debug
