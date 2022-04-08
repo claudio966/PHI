@@ -4,10 +4,10 @@ use std.textio.all;
 --use IEEE.numeric_std.all;
 
 
-ENTITY testbench2 is
-END testbench2;
+ENTITY testbench is
+END testbench;
 
-ARCHITECTURE behavioral OF testbench2 IS
+ARCHITECTURE behavioral OF testbench IS
 	COMPONENT contador99 
 		PORT 
 		(

@@ -1,5 +1,5 @@
 $date
-  Thu Apr  7 21:56:16 2022
+  Thu Apr  7 21:58:40 2022
 $end
 $version
   GHDL v0
@@ -17,7 +17,7 @@ $scope module numeric_std $end
 $upscope $end
 $scope module math_real $end
 $upscope $end
-$scope module testbench2 $end
+$scope module testbench $end
 $var reg 1 ! ck $end
 $var reg 7 " hex0[6:0] $end
 $var reg 7 # hex1[6:0] $end
