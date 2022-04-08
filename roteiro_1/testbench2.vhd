@@ -31,9 +31,9 @@ FUNCTION decoder(i : IN STD_LOGIC_VECTOR(6 DOWNTO 0) := "0000000")
 	VARIABLE output : string(1 to 4);
 BEGIN
 	CASE i IS
-		WHEN "1111110" => output := "0x01";
-		WHEN "0110000" => output := "0x4F";
-		WHEN "1101101" => output := "0x12";
+		WHEN "1000000" => output := "0x40";
+		WHEN "1111001" => output := "0x79";
+		WHEN "0100100" => output := "0x24";
 		WHEN others => output := "0xXX";
 		return output;
 	END CASE;
@@ -58,7 +58,7 @@ salva_dados : PROCESS(ck)
 		IF RISING_EDGE(ck) THEN
 			dado := decoder(hex2);
 			write(linha, dado);
-			hwrite(linha, hex2); -- Use for debug
+			--hwrite(linha, hex2); -- Use for debug
 			writeline(arquivo, linha);
 		END IF;
 	END PROCESS;
