@@ -28,6 +28,6 @@ begin
 							 resultado_subtrator when (sel = "001") else
 							 resultado_and when (sel = "010") else
 	                   resultado_or when (sel = "011") else
-	                   resultado_shift when (sel = "100") else
-							 null;
+	                   resultado_shift when (sel = "100");
+				--			 null;
 end comportamento;

@@ -35,6 +35,8 @@ architecture comportamento of testbench is
 		b : in std_logic_vector (nbits - 1 downto 0);
 		saida : out std_logic_vector (nbits - 1 downto 0)
 	);
+	end component;
+
 	begin
 	
 		clk <=  '1' after 0.5 ns when clk = '0' else
