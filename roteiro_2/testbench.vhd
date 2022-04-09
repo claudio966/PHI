@@ -74,9 +74,12 @@ begin
 		b <= b_array(i);
 			
 		write(linha_arquivo, to_integer(unsigned(a))); -- escreve o primeiro operando na linha
+		write(linha_arquivo, ' ');
 		write(linha_arquivo, '+'); -- escreve a operacao realizada
+		write(linha_arquivo, ' ');
 		write(linha_arquivo, to_integer(unsigned(b))); -- escreve o segundo operando na linha
 		write(linha_arquivo, '='); -- sinal
+		write(linha_arquivo, ' ');
 		write(linha_arquivo, to_integer(unsigned(resultado_operacao))); -- resultado obtido
 		writeline(resultado_ula, linha_arquivo); -- escreve a linha no arquivo
 		i <= i + 1;
