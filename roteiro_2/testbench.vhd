@@ -12,7 +12,7 @@ architecture comportamento of testbench is
 
 	signal nbits: integer := 4;
 
-	file resultado_ula : text open write_mode is "resultado_ula.txt";
+	file resultado_ula : text open write_mode is "/home/pc-csic-06/resultado_ula.txt";
 	
 	type t_Memory is array (0 to 3) of std_logic_vector(nbits - 1 downto 0);
 
@@ -21,15 +21,15 @@ architecture comportamento of testbench is
 	signal a_array : t_Memory;
 	signal b_array : t_Memory;
 	
-	signal resultado_operacao: std_logic_vector := "0000";
-	signal operacao: std_logic_vector := "000";
+	signal resultado_operacao: std_logic_vector(3 downto 0) := "0000";
+	signal operacao: std_logic_vector (2 downto 0) := "000";
 	signal a: std_logic_vector (nbits - 1 downto 0) := "0000";
 	signal b: std_logic_vector (nbits - 1 downto 0) := "0000";
 	signal i: integer := 0;
 
 	component top_level
 	generic(
-		nbits : integer := 0 --numero de bits configuravel
+		nbits : integer := 4 --numero de bits configuravel
 	);
 	port(
 		clk: in std_logic;
@@ -41,18 +41,19 @@ architecture comportamento of testbench is
 	end component;
 begin
 		
+	-- TODO verificar a forma correta de converter um integer
+	-- para um std_logic_vector
 	clk <=  '1' after 0.5 ns when clk = '0' else
 			  '0' after 0.5 ns when clk = '1';
-				  
-	a_array(0) <= "1100";
-	a_array(1) <= "1101";
-	a_array(2) <= "1111";
-	a_array(3) <= "1000";
-		
-	b_array(0) <= "1000";
-	b_array(1) <= "1001";
-	b_array(2) <= "1100";
-	b_array(3) <= "1010";
+	a_array(0) <= std_logic_vector(signed(1100));
+	a_array(1) <= std_logic_vector(signed(1101));
+	a_array(2) <= std_logic_vector(signed(1111));
+	a_array(3) <= std_logic_vector(signed(1000));
+	
+	b_array(0) <= std_logic_vector(signed(1000));
+	b_array(1) <= std_logic_vector(signed(1001));
+	b_array(2) <= std_logic_vector(signed(1100));
+	b_array(3) <= std_logic_vector(signed(1010));
 		
 	ula: top_level
 	port map(
@@ -63,16 +64,18 @@ begin
 		saida => resultado_operacao -- mapeia a saida para o sinal a ser salvo
 	);
 	process(clk)
-	variable linha_arquivo : line;
-	begin
-	if rising_edge(clk) then
-		if i > 3 then
+		
+		variable linha_arquivo : line;
+		begin
+		if rising_edge(clk) then
+			if i > 3 then
 				i <= 0;
-		end if;
+			end if;
+				
+			a <= a_array(i);
+			b <= b_array(i);
 			
-		a <= a_array(i);
-		b <= b_array(i);
-			
+		write(linha_arquivo, to_integer(unsigned(a))); -- escreve o primeiro operando na linha
 		write(linha_arquivo, to_integer(unsigned(a))); -- escreve o primeiro operando na linha
 		write(linha_arquivo, ' ');
 		write(linha_arquivo, '+'); -- escreve a operacao realizada
