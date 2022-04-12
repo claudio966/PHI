@@ -12,7 +12,7 @@ architecture comportamento of testbench is
 
 	signal nbits: integer := 4;
 
-	file resultado_ula : text open write_mode is "/home/pc-csic-06/resultado_ula.txt";
+	file resultado_ula : text open write_mode is "/home/demo/resultado_ula.txt";
 	
 	type t_Memory is array (0 to 3) of std_logic_vector(nbits - 1 downto 0);
 
@@ -26,6 +26,15 @@ architecture comportamento of testbench is
 	signal a: std_logic_vector (nbits - 1 downto 0) := "0000";
 	signal b: std_logic_vector (nbits - 1 downto 0) := "0000";
 	signal i: integer := 0;
+
+	signal d0 : std_logic_vector(3 downto 0) := "0100";
+	signal d1 : std_logic_vector(3 downto 0) := "0110";
+	signal d2 : std_logic_vector(3 downto 0) := "0001";
+	signal d3 : std_logic_vector(3 downto 0) := "0010";
+	signal d4 : std_logic_vector(3 downto 0) := "0011";
+	signal d5 : std_logic_vector(3 downto 0) := "0100";
+	signal d6 : std_logic_vector(3 downto 0) := "0110";
+	signal d7 : std_logic_vector(3 downto 0) := "0000";
 
 	component top_level
 	generic(
@@ -45,15 +54,15 @@ begin
 	-- para um std_logic_vector
 	clk <=  '1' after 0.5 ns when clk = '0' else
 			  '0' after 0.5 ns when clk = '1';
-	a_array(0) <= std_logic_vector(signed(1100));
-	a_array(1) <= std_logic_vector(signed(1101));
-	a_array(2) <= std_logic_vector(signed(1111));
-	a_array(3) <= std_logic_vector(signed(1000));
+	a_array(0) <= d0;
+	a_array(1) <= d1;
+	a_array(2) <= d2;
+	a_array(3) <= d3;
 	
-	b_array(0) <= std_logic_vector(signed(1000));
-	b_array(1) <= std_logic_vector(signed(1001));
-	b_array(2) <= std_logic_vector(signed(1100));
-	b_array(3) <= std_logic_vector(signed(1010));
+	b_array(0) <= d4;
+	b_array(1) <= d5;
+	b_array(2) <= d6;
+	b_array(3) <= d7;
 		
 	ula: top_level
 	port map(
@@ -68,14 +77,15 @@ begin
 		variable linha_arquivo : line;
 		begin
 		if rising_edge(clk) then
-			if i > 3 then
+			if i > 1 then
 				i <= 0;
+			else
+				i <= i + 1;
 			end if;
 				
 			a <= a_array(i);
 			b <= b_array(i);
 			
-		write(linha_arquivo, to_integer(unsigned(a))); -- escreve o primeiro operando na linha
 		write(linha_arquivo, to_integer(unsigned(a))); -- escreve o primeiro operando na linha
 		write(linha_arquivo, ' ');
 		write(linha_arquivo, '+'); -- escreve a operacao realizada
@@ -85,7 +95,6 @@ begin
 		write(linha_arquivo, ' ');
 		write(linha_arquivo, to_integer(unsigned(resultado_operacao))); -- resultado obtido
 		writeline(resultado_ula, linha_arquivo); -- escreve a linha no arquivo
-		i <= i + 1;
 	end if;
 	end process;
 end comportamento;
