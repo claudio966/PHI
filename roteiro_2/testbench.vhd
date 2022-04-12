@@ -12,7 +12,7 @@ architecture comportamento of testbench is
 
 	signal nbits: integer := 4;
 
-	file resultado_ula : text open write_mode is "/home/demo/resultado_ula.txt";
+	file resultado_ula : text open write_mode is "/home/pc-csic-06/resultado_ula.txt";
 	
 	type t_Memory is array (0 to 3) of std_logic_vector(nbits - 1 downto 0);
 
@@ -76,7 +76,7 @@ begin
 		
 		variable linha_arquivo : line;
 		begin
-		if rising_edge(clk) then
+		if falling_edge(clk) then
 			if i > 1 then
 				i <= 0;
 			else
@@ -85,16 +85,17 @@ begin
 				
 			a <= a_array(i);
 			b <= b_array(i);
-			
+
 		write(linha_arquivo, to_integer(unsigned(a))); -- escreve o primeiro operando na linha
 		write(linha_arquivo, ' ');
 		write(linha_arquivo, '+'); -- escreve a operacao realizada
 		write(linha_arquivo, ' ');
 		write(linha_arquivo, to_integer(unsigned(b))); -- escreve o segundo operando na linha
+		write(linha_arquivo, ' ');
 		write(linha_arquivo, '='); -- sinal
 		write(linha_arquivo, ' ');
 		write(linha_arquivo, to_integer(unsigned(resultado_operacao))); -- resultado obtido
 		writeline(resultado_ula, linha_arquivo); -- escreve a linha no arquivo
-	end if;
+		end if;
 	end process;
 end comportamento;
