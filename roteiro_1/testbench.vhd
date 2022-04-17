@@ -30,6 +30,7 @@ FUNCTION decoder(i : IN STD_LOGIC_VECTOR(6 DOWNTO 0) := "0000000")
 	return string is
 	VARIABLE output : string(1 to 4);
 BEGIN
+	-- Verifica a saída no display de 7 segmentos e define a saída correspondente
 	CASE i IS
 		WHEN "1000000" => output := "0x40";
 		WHEN "1111001" => output := "0x79";
@@ -49,7 +50,7 @@ inst : contador99 PORT MAP (
 	hex2 => hex2
 );
 
-
+-- Processo que realiza a escrita de output para um arquivo
 salva_dados : PROCESS(ck)
 	file arquivo : text open write_mode is "/home/demo/saida.dat";
 	variable linha : line;

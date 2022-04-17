@@ -1,4 +1,5 @@
 -- circuito para a implementacao da operacao de shift
+<<<<<<< HEAD
 
 library ieee;
 
