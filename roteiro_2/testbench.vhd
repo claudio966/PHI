@@ -22,19 +22,19 @@ architecture comportamento of testbench is
 	signal b_array : t_Memory;
 	
 	signal resultado_operacao: std_logic_vector(3 downto 0) := "0000";
-	signal operacao: std_logic_vector (2 downto 0) := "000";
+	signal operacao: std_logic_vector (2 downto 0) := "100";
 	signal a: std_logic_vector (nbits - 1 downto 0) := "0000";
 	signal b: std_logic_vector (nbits - 1 downto 0) := "0000";
 	signal i: integer := 0;
 
-	signal d0 : std_logic_vector(3 downto 0) := "0100";
-	signal d1 : std_logic_vector(3 downto 0) := "0110";
+	signal d0 : std_logic_vector(3 downto 0) := "0001";
+	signal d1 : std_logic_vector(3 downto 0) := "0010";
 	signal d2 : std_logic_vector(3 downto 0) := "0001";
-	signal d3 : std_logic_vector(3 downto 0) := "0010";
-	signal d4 : std_logic_vector(3 downto 0) := "0011";
-	signal d5 : std_logic_vector(3 downto 0) := "0100";
-	signal d6 : std_logic_vector(3 downto 0) := "0110";
-	signal d7 : std_logic_vector(3 downto 0) := "0000";
+	signal d3 : std_logic_vector(3 downto 0) := "0001";
+	signal d4 : std_logic_vector(3 downto 0) := "0000";
+	signal d5 : std_logic_vector(3 downto 0) := "0001";
+	signal d6 : std_logic_vector(3 downto 0) := "0001";
+	signal d7 : std_logic_vector(3 downto 0) := "0001";
 
 	component top_level
 	generic(
@@ -42,7 +42,7 @@ architecture comportamento of testbench is
 	);
 	port(
 		clk: in std_logic;
-		sel: in std_logic_vector (2 downto 0) := "000";
+		sel: in std_logic_vector (2 downto 0) := "100";
 		a : in std_logic_vector (nbits - 1 downto 0) := "0000";
 		b : in std_logic_vector (nbits - 1 downto 0) := "0000";
 		saida : out std_logic_vector (nbits - 1 downto 0)
@@ -88,11 +88,12 @@ begin
 			
 		write(linha_arquivo, to_integer(unsigned(a))); -- escreve o primeiro operando na linha
 		write(linha_arquivo, ' ');
-		write(linha_arquivo, '+'); -- escreve a operacao realizada
-		write(linha_arquivo, ' ');
-		write(linha_arquivo, to_integer(unsigned(b))); -- escreve o segundo operando na linha
+	--	write(linha_arquivo, '+'); -- escreve a operacao realizada
+	--	write(linha_arquivo, ' ');
+	--	write(linha_arquivo, to_integer(unsigned(b))); -- escreve o segundo operando na linha
 		write(linha_arquivo, '='); -- sinal
-		write(linha_arquivo, ' ');
+		write(linha_arquivo, '>');
+	--	write(linha_arquivo, ' ');
 		write(linha_arquivo, to_integer(unsigned(resultado_operacao))); -- resultado obtido
 		writeline(resultado_ula, linha_arquivo); -- escreve a linha no arquivo
 	end if;
