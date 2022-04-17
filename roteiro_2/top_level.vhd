@@ -28,6 +28,16 @@ architecture comportamento of top_level is
 		resultado_somador: out std_logic_vector (nbits - 1 downto 0)
 	);
 	end component;
+	component shiftcircuito
+	generic(
+		nbits: integer := 4
+	);
+	port(
+		a : in std_logic_vector (nbits - 1 downto 0);
+		b : in std_logic_vector (nbits - 1 downto 0);
+		resultado_shift: out std_logic_vector (nbits - 1 downto 0)
+	);
+	end component;
 	component subtrator
 	generic(
 		nbits: integer := 4
@@ -90,7 +100,7 @@ architecture comportamento of top_level is
 	signal resultado_final : std_logic_vector (nbits -1 downto 0);
 	
 	begin
-	
+  
 		somador_ula: somador
 		generic map(
 			nbits => nbits
@@ -100,6 +110,15 @@ architecture comportamento of top_level is
 			b => b,
 			resultado_somador => resultado_somador
 		);
+		shift_ula: shiftcircuito
+      generic map(
+            nbits => nbits
+      )
+      port map(
+           a => a,
+           b => b,
+           resultado_shift => resultado_shift
+      );
 		subtrator_ula: subtrator
 		generic map(
 			nbits => nbits
