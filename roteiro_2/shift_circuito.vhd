@@ -4,8 +4,8 @@ library ieee;
 
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
-use ieee.numeric_bit.all;
-use IEEE.std_logic_unsigned.all;
+--use ieee.numeric_bit.all;
+--use IEEE.std_logic_unsigned.all;
 
 entity shift is 
 	generic(
@@ -22,6 +22,6 @@ architecture comportamento of shift is
 	begin
 	process(a,b) 
 	begin
-		resultado_shift <= std_logic_vector(ROTATE_LEFT(unsigned(a), unsigned(b) ));	
+		resultado_shift <= std_logic_vector(ROTATE_LEFT(unsigned(a), to_integer(unsigned(b)) ));	
 	end process;
 end comportamento;
