@@ -22,8 +22,8 @@ ARCHITECTURE behavioral OF testbench IS
 SIGNAL ck : STD_LOGIC := '0';
 CONSTANT clk_period : TIME := 1 ms;
 -- output
-SIGNAL hex0 :  STD_LOGIC_VECTOR(6 DOWNTO 0);
-SIGNAL hex1 :  STD_LOGIC_VECTOR(6 DOWNTO 0);
+SIGNAL hex0 :  STD_LOGIC_VECTOR(6 DOWNTO 0) := "1000000";
+SIGNAL hex1 :  STD_LOGIC_VECTOR(6 DOWNTO 0) := "1000000";
 SIGNAL hex2 :  STD_LOGIC_VECTOR(6 DOWNTO 0);
 
 FUNCTION decoder(i : IN STD_LOGIC_VECTOR(6 DOWNTO 0) := "0000000")
@@ -57,7 +57,7 @@ salva_dados : PROCESS(ck)
 	variable dado : string(1 to 4);
 	BEGIN
 		IF RISING_EDGE(ck) THEN
-			dado := decoder(hex2);
+			dado := decoder(hex0);
 			write(linha, dado);
 			--hwrite(linha, hex2); -- Use for debug
 			writeline(arquivo, linha);
