@@ -18,13 +18,13 @@ BEGIN
 	ckout <= ckout_s;
 	PROCESS (ckin)
 	BEGIN
-		IF ckin'EVENT and ckin = '0' THEN
+		IF ckin'EVENT and ckin = '1' THEN
 			IF vcont_s /= max THEN
 				vcont_s <= std_logic_vector(unsigned(vcont_s) + 1);
-				ckout_s <= '1';
+				ckout_s <= '0';
 			ELSE
 				vcont_s <= "0000";
-				ckout_s <= '0';
+				ckout_s <= '1';
 			END IF;
 		END IF;
 	END PROCESS;
