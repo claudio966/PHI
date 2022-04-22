@@ -25,3 +25,5 @@ BEGIN
 	"0001110" when "1111", --F
 	"1000000" when others; --0
 END decod;
+
+
