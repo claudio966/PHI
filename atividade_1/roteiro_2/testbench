@@ -1,0 +1,314 @@
+$date
+  Tue Apr 12 09:09:58 2022
+$end
+$version
+  GHDL v0
+$end
+$timescale
+  1 fs
+$end
+$scope module standard $end
+$upscope $end
+$scope module textio $end
+$upscope $end
+$scope module std_logic_1164 $end
+$upscope $end
+$scope module numeric_std $end
+$upscope $end
+$scope module std_logic_arith $end
+$upscope $end
+$scope module std_logic_unsigned $end
+$upscope $end
+$scope module testbench $end
+$var integer 32 ! nbits $end
+$var reg 1 " clk $end
+$comment a_array is not handled $end
+$comment b_array is not handled $end
+$var reg 4 # resultado_operacao[3:0] $end
+$var reg 3 $ operacao[2:0] $end
+$var reg 4 % a[3:0] $end
+$var reg 4 & b[3:0] $end
+$var integer 32 ' i $end
+$var reg 4 ( d0[3:0] $end
+$var reg 4 ) d1[3:0] $end
+$var reg 4 * d2[3:0] $end
+$var reg 4 + d3[3:0] $end
+$var reg 4 , d4[3:0] $end
+$var reg 4 - d5[3:0] $end
+$var reg 4 . d6[3:0] $end
+$var reg 4 / d7[3:0] $end
+$scope module ula $end
+$var reg 1 0 clk $end
+$var reg 3 1 sel[2:0] $end
+$var reg 4 2 a[3:0] $end
+$var reg 4 3 b[3:0] $end
+$var reg 4 4 saida[3:0] $end
+$var reg 4 5 resultado_somador[3:0] $end
+$var reg 4 6 resultado_subtrator[3:0] $end
+$var reg 4 7 resultado_or[3:0] $end
+$var reg 4 8 resultado_and[3:0] $end
+$var reg 4 9 resultado_shift[3:0] $end
+$var reg 4 : resultado_final[3:0] $end
+$scope module somador_ula $end
+$var reg 4 ; a[3:0] $end
+$var reg 4 < b[3:0] $end
+$var reg 4 = resultado_somador[3:0] $end
+$upscope $end
+$scope module subtrator_ula $end
+$var reg 4 > a[3:0] $end
+$var reg 4 ? b[3:0] $end
+$var reg 4 @ resultado_subtrator[3:0] $end
+$upscope $end
+$scope module and_ula $end
+$var reg 4 A a[3:0] $end
+$var reg 4 B b[3:0] $end
+$var reg 4 C resultado_and[3:0] $end
+$upscope $end
+$scope module or_ula $end
+$var reg 4 D a[3:0] $end
+$var reg 4 E b[3:0] $end
+$var reg 4 F resultado_or[3:0] $end
+$upscope $end
+$scope module mux_ula $end
+$var reg 3 G sel[2:0] $end
+$var reg 4 H resultado_final[3:0] $end
+$var reg 4 I resultado_somador[3:0] $end
+$var reg 4 J resultado_subtrator[3:0] $end
+$var reg 4 K resultado_and[3:0] $end
+$var reg 4 L resultado_or[3:0] $end
+$var reg 4 M resultado_shift[3:0] $end
+$upscope $end
+$scope module registrador_ula $end
+$var reg 1 N clk $end
+$var reg 4 O resultado_final[3:0] $end
+$var reg 4 P saida[3:0] $end
+$upscope $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+b100 !
+0"
+bUUUU #
+b000 $
+b0000 %
+b0000 &
+b0 '
+b0100 (
+b0110 )
+b0001 *
+b0010 +
+b0011 ,
+b0100 -
+b0110 .
+b0000 /
+00
+b000 1
+b0000 2
+b0000 3
+bUUUU 4
+b0000 5
+b0000 6
+b0000 7
+b0000 8
+bUUUU 9
+b0000 :
+b0000 ;
+b0000 <
+b0000 =
+b0000 >
+b0000 ?
+b0000 @
+b0000 A
+b0000 B
+b0000 C
+b0000 D
+b0000 E
+b0000 F
+b000 G
+b0000 H
+b0000 I
+b0000 J
+b0000 K
+b0000 L
+bUUUU M
+0N
+b0000 O
+bUUUU P
+#500000
+1"
+b0000 #
+10
+b0000 4
+1N
+b0000 P
+#1000000
+0"
+b0100 %
+b0011 &
+b1 '
+00
+b0100 2
+b0011 3
+b0111 5
+b0001 6
+b0111 7
+b0111 :
+b0100 ;
+b0011 <
+b0111 =
+b0100 >
+b0011 ?
+b0001 @
+b0100 A
+b0011 B
+b0100 D
+b0011 E
+b0111 F
+b0111 H
+b0111 I
+b0001 J
+b0111 L
+0N
+b0111 O
+#1500000
+1"
+b0111 #
+10
+b0111 4
+1N
+b0111 P
+#2000000
+0"
+b0110 %
+b0100 &
+b10 '
+00
+b0110 2
+b0100 3
+b1010 5
+b0010 6
+b0110 7
+b0100 8
+b1010 :
+b0110 ;
+b0100 <
+b1010 =
+b0110 >
+b0100 ?
+b0010 @
+b0110 A
+b0100 B
+b0100 C
+b0110 D
+b0100 E
+b0110 F
+b1010 H
+b1010 I
+b0010 J
+b0100 K
+b0110 L
+0N
+b1010 O
+#2500000
+1"
+b1010 #
+10
+b1010 4
+1N
+b1010 P
+#3000000
+0"
+b0001 %
+b0110 &
+b0 '
+00
+b0001 2
+b0110 3
+b0111 5
+b1011 6
+b0111 7
+b0000 8
+b0111 :
+b0001 ;
+b0110 <
+b0111 =
+b0001 >
+b0110 ?
+b1011 @
+b0001 A
+b0110 B
+b0000 C
+b0001 D
+b0110 E
+b0111 F
+b0111 H
+b0111 I
+b1011 J
+b0000 K
+b0111 L
+0N
+b0111 O
+#3500000
+1"
+b0111 #
+10
+b0111 4
+1N
+b0111 P
+#4000000
+0"
+b0100 %
+b0011 &
+b1 '
+00
+b0100 2
+b0011 3
+b0001 6
+b0100 ;
+b0011 <
+b0100 >
+b0011 ?
+b0001 @
+b0100 A
+b0011 B
+b0100 D
+b0011 E
+b0001 J
+0N
+#4500000
+1"
+10
+1N
+#5000000
+0"
+b0110 %
+b0100 &
+b10 '
+00
+b0110 2
+b0100 3
+b1010 5
+b0010 6
+b0110 7
+b0100 8
+b1010 :
+b0110 ;
+b0100 <
+b1010 =
+b0110 >
+b0100 ?
+b0010 @
+b0110 A
+b0100 B
+b0100 C
+b0110 D
+b0100 E
+b0110 F
+b1010 H
+b1010 I
+b0010 J
+b0100 K
+b0110 L
+0N
+b1010 O

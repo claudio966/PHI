@@ -1,0 +1,25 @@
+v 4
+file . "top_level.vhd" "aab2d185476184c6e77c6b65defbdb93e92220ec" "20220411124325.800":
+  entity top_level at 1( 0) + 0 on 23;
+  architecture comportamento of top_level at 19( 375) + 0 on 24;
+file . "somador.vhd" "596c671f47467d4c2fa5c4cf22aa0e21ee074075" "20220411124313.762":
+  entity somador at 2( 25) + 0 on 19;
+  architecture comportamento of somador at 20( 345) + 0 on 20;
+file . "oucircuito.vhd" "73d540d29577890325e511c1e0bdef22f296e57b" "20220411124245.744":
+  entity oucircuito at 3( 47) + 0 on 15;
+  architecture comportamento of oucircuito at 21( 334) + 0 on 16;
+file . "ecircuito.vhd" "4639fde897f1fc34864387f7a7e69900c1c29a43" "20220411124238.316":
+  entity ecircuito at 3( 38) + 0 on 11;
+  architecture comportamento of ecircuito at 19( 322) + 0 on 12;
+file . "mux.vhd" "f5ce789c0308c491946c5830f5a295d666f95aca" "20220411124242.853":
+  entity mux at 4( 87) + 0 on 13;
+  architecture comportamento of mux at 25( 614) + 0 on 14;
+file . "registrador.vhd" "14381449ec0749eec786585dc573d10af8b7a62c" "20220411124250.552":
+  entity registrador at 3( 42) + 0 on 17;
+  architecture comportamento of registrador at 20( 309) + 0 on 18;
+file . "subtrator.vhd" "596b19b5b2d722589720414bdfc1ec76e39149c4" "20220411124321.722":
+  entity subtrator at 3( 47) + 0 on 21;
+  architecture comportamento of subtrator at 21( 371) + 0 on 22;
+file . "testbench.vhd" "dbbb9f2c373b3dbf7bc2a69a7a9a03751bd8e096" "20220412120956.242":
+  entity testbench at 2( 30) + 0 on 63;
+  architecture comportamento of testbench at 11( 157) + 0 on 64;
