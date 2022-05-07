@@ -3,12 +3,9 @@ use IEEE.STD_LOGIC_1164.all;
 
 entity bc is
 	port(
-		clk, reset, inicio	: in  std_logic;
-		pronto, overflow : out std_logic;
-		set, dec : out std_logic;
-		cac, rac : out std_logic;
-		zero, overflow_flag : in std_logic;
-		proximo : out std_logic
+		clk, reset, com_moeda : in  std_logic;
+		moeda : out std_logic_vector (7 downto 0);
+		pronto : out std_logic
 	);
 end bc;
 
@@ -17,17 +14,17 @@ architecture comportamento of bc is
 	signal prox_estado, estado : tipo_estado := S0;
 begin
 	-- Circuito combinacional -> não depende de clock
-	logica_proximo_estado : process(estado, inicio, zero)
+	logica_proximo_estado : process(estado, com_moeda)
 	begin
 		case estado is
 			when S0 =>
-				if inicio = '0' then
-					prox_estado <= S0;
-				else
+				if com_moeda = '1' then
 					prox_estado <= S1;
+				else
+					prox_estado <= S0;
 				end if;
 			when S1 => 
-				if zero = '0' then
+				if com_moeda = '0' then
 					prox_estado <= S0;
 				else
 					prox_estado <= S1;
@@ -45,25 +42,13 @@ begin
 	end process;
 	
 	-- Circuito combinacional -> não depende de clock
-	logica_saida : process(estado, overflow_flag)
+	logica_saida : process(estado)
 	begin
 		case estado is
 			when S0 =>
-				pronto <= '1';
-				cac <= '0';
-				rac <= '1';
-				set <= '1';
-				dec <= '0';
-				overflow <= overflow_flag;
-				proximo <= '0';
-			when S1 =>
 				pronto <= '0';
-				cac <= '0';
-				rac <= '0';
-				set <= '0';
-				dec <= '0';
-				overflow <= overflow_flag;
-				proximo <= '0';
+			when S1 =>
+				pronto <= '1';
 		end case;
 	end process;
 	
