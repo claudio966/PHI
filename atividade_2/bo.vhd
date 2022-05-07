@@ -4,8 +4,9 @@ use IEEE.numeric_std.all;
 
 entity registrador is 
 	generic (
-		nbits : integer := 8;
+		nbits : integer := 8
 	);
+
 	port (
 		clk : in std_logic;
 		reg_load : in std_logic;
@@ -13,13 +14,13 @@ entity registrador is
 		output : out std_logic_vector(nbits - 1 downto 0);
 		input : in std_logic_vector(nbits - 1 downto 0);
 		alu : in std_logic_vector(1 downto 0);
-		ie : in st_logic;
+		ie : in st_logic
 	);
 end registrador;
 
-architeture comportamento of registrador is
-	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "00000000";
+architecture comportamento of registrador is
 begin
+	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "00000000";
 	--multiplexador
 	mux_output <= input when ie = '1' else 1;
 
