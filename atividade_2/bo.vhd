@@ -12,7 +12,6 @@ entity registrador is
 		reg_clear : in std_logic;
 		output : out std_logic_vector(nbits - 1 downto 0);
 		input : in std_logic_vector(nbits - 1 downto 0);
-		output : in std_logic_vector(nbits - 1 downto 0);
 		alu : in std_logic_vector(1 downto 0);
 		ie : in st_logic;
 	);
