@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><!--Created with JFLAP 7.1.--><structure>
+	<type>fa</type>
+	<automaton>
+		<!--The list of states.-->
+		<state id="0" name="s0">
+			<x>277.0</x>
+			<y>219.0</y>
+			<label>Without Coin</label>
+			<initial/>
+		</state>
+		<state id="1" name="s1">
+			<x>441.0</x>
+			<y>220.0</y>
+			<label>With Coin</label>
+			<final/>
+		</state>
+		<!--The list of transitions.-->
+		<transition>
+			<from>0</from>
+			<to>0</to>
+			<read>0</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>1</to>
+			<read>1</read>
+		</transition>
+		<transition>
+			<from>1</from>
+			<to>0</to>
+			<read>0</read>
+		</transition>
+		<transition>
+			<from>0</from>
+			<to>1</to>
+			<read>1</read>
+		</transition>
+	</automaton>
+</structure>
