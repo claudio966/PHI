@@ -14,15 +14,18 @@ entity registrador is
 		output : out std_logic_vector(nbits - 1 downto 0);
 		input : in std_logic_vector(nbits - 1 downto 0);
 		alu : in std_logic_vector(1 downto 0);
-		ie : in st_logic
+		ie : in std_logic
 	);
 end registrador;
 
 architecture comportamento of registrador is
-begin
 	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "00000000";
+	signal mux_output : std_logic_vector(nbits -1 downto 0);
+	signal alu_output : std_logic_vector(nbits - 1 downto 0);
+	signal reg_output : std_logic_vector(nbits - 1 downto 0);
+begin
 	--multiplexador
-	mux_output <= input when ie = '1' else 1;
+	mux_output <= input when ie = '1' else "00000001";
 
 	--ALU
 	process(mux_output, reg_output, alu)
@@ -32,11 +35,13 @@ begin
 				alu_output <= mux_output;
 			when "01" =>
 				alu_output <= std_logic_vector(signed(mux_output) + signed(reg_output));
-			when "10"
+			when "10" =>
 				alu_output <= std_logic_vector(signed(mux_output) - signed(reg_output));
 			-- TODO implementar o comparador
 			-- when "11"
-			-- alu_output <= resultado_comparador	
+			-- alu_output <= resultado_comparador
+			when others =>
+				alu_output <= (others => '0');
 		end case;
 	end process;	
 
@@ -46,9 +51,10 @@ begin
 		if rising_edge(clk) then
 			if reg_clear = '1' then
 				reg_output <= (others => '0');
-			elseif reg_load = '1' then
+			elsif reg_load = '1' then
 				reg_output <= alu_output;
-			endif;
-		endif;
+			end if;
+		end if;
 	end process;
+	output <= reg_output;
 end comportamento;
