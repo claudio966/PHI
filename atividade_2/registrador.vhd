@@ -10,7 +10,7 @@ entity registrador is
 		reg_clear : in std_logic;
 		output : out std_logic_vector(nbits - 1 downto 0);
 	);
-end registrador
+end registrador;
 
 architeture comportamento of registrador is
 begin
@@ -20,6 +20,6 @@ begin
 				reg_output <= (others => '0');
 			elseif reg_load = '1' then
 				reg_output <= alu_output;
-			endif
-		endif
-end comportamento
+			endif;
+		endif;
+end comportamento;
