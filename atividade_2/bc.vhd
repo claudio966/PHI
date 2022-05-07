@@ -13,7 +13,7 @@ entity bc is
 end bc;
 
 architecture comportamento of bc is
-	type tipo_estado is (S0, S1, S2, S3);
+	type tipo_estado is (S0, S1);
 	signal prox_estado, estado : tipo_estado := S0;
 begin
 	-- Circuito combinacional -> não depende de clock
@@ -28,14 +28,10 @@ begin
 				end if;
 			when S1 => 
 				if zero = '0' then
-					prox_estado <= S2;
+					prox_estado <= S0;
 				else
-					prox_estado <= S3;
+					prox_estado <= S1;
 				end if;
-			when S2 =>
-				prox_estado <= S1;
-			when S3 =>
-				prox_estado <= S0;
 		end case;
 	end process;
 	
@@ -62,22 +58,6 @@ begin
 				proximo <= '0';
 			when S1 =>
 				pronto <= '0';
-				cac <= '0';
-				rac <= '0';
-				set <= '0';
-				dec <= '0';
-				overflow <= overflow_flag;
-				proximo <= '0';
-			when S2 =>
-				pronto <= '0';
-				cac <= '1';
-				rac <= '0';
-				set <= '0';
-				dec <= '1';
-				overflow <= overflow_flag;
-				proximo <= '1';
-			when S3 =>
-				pronto <= '1';
 				cac <= '0';
 				rac <= '0';
 				set <= '0';
