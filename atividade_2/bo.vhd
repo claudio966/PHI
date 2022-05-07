@@ -2,7 +2,7 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity registrador is 
+entity bo is 
 	generic (
 		nbits : integer := 8
 	);
@@ -16,11 +16,11 @@ entity registrador is
 		alu : in std_logic_vector(1 downto 0);
 		ie : in std_logic
 	);
-end registrador;
+end bo;
 
-architecture comportamento of registrador is
+architecture comportamento of bo is
 	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "00000000";
-	signal mux_output : std_logic_vector(nbits -1 downto 0);
+	signal mux_output : std_logic_vector(nbits - 1 downto 0);
 	signal alu_output : std_logic_vector(nbits - 1 downto 0);
 	signal reg_output : std_logic_vector(nbits - 1 downto 0);
 begin
