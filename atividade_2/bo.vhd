@@ -9,23 +9,23 @@ entity bo is
 
 	port (
 		clk : in std_logic;
-		reg_load : in std_logic;
+		c : in std_logic; -- Entrada da moeda detectada
 		reg_clear : in std_logic;
-		output : out std_logic_vector(nbits - 1 downto 0);
-		input : in std_logic_vector(nbits - 1 downto 0);
+		a : in std_logic_vector(nbits - 1 downto 0); -- Saida do registrado de BC
 		alu : in std_logic_vector(1 downto 0);
+		liberado : out std_logic; -- o valor de d
 		ie : in std_logic
 	);
 end bo;
 
 architecture comportamento of bo is
-	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "00000000";
-	signal mux_output : std_logic_vector(nbits - 1 downto 0);
-	signal alu_output : std_logic_vector(nbits - 1 downto 0);
 	signal reg_output : std_logic_vector(nbits - 1 downto 0);
+	signal alu_output : std_logic_vector(nbits - 1 downto 0);
+	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "00000000"; -- o valor de S
+	signal mux_output : std_logic_vector(nbits - 1 downto 0);
 begin
 	--multiplexador
-	mux_output <= input when ie = '1' else "00000001";
+	mux_output <= a when ie = '1' else "00000001";
 
 	--ALU
 	process(mux_output, reg_output, alu)
@@ -37,24 +37,37 @@ begin
 				alu_output <= std_logic_vector(signed(mux_output) + signed(reg_output));
 			when "10" =>
 				alu_output <= std_logic_vector(signed(mux_output) - signed(reg_output));
-			-- TODO implementar o comparador
-			-- when "11"
-			-- alu_output <= resultado_comparador
+			when "11" =>
+				if signed(reg_output) >= signed(item_preco) then
+					alu_output <= "00000001";
+				else
+					alu_output <= "00000000";
+				end if;
 			when others =>
 				alu_output <= (others => '0');
 		end case;
 	end process;	
-
+	
+	--Logica para liberar o item
+	liberar_item: process(clk)
+	begin
+		if rising_edge(clk) then
+			if alu_output = "00000001" then
+				liberado <= '1';
+			end if;
+		end if;
+	end process;
+	
 	--registrador
-	process(clk)
+	registrador_op: process(clk)
 	begin
 		if rising_edge(clk) then
 			if reg_clear = '1' then
 				reg_output <= (others => '0');
-			elsif reg_load = '1' then
+			elsif c = '1' then
 				reg_output <= alu_output;
 			end if;
 		end if;
 	end process;
-	output <= reg_output;
 end comportamento;
+
