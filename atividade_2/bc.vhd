@@ -1,55 +1,74 @@
-library IEEE;
-use IEEE.STD_LOGIC_1164.all;
+library ieee;
+
+use ieee.std_logic_1164.all;
 
 entity bc is
+
 	port(
-		clk, reset, com_moeda : in  std_logic;
-		moeda : out std_logic_vector (7 downto 0);
-		pronto : out std_logic
+		reset: in std_logic := '0'; -- entrada de reset
+		clock: in std_logic; -- entrada de clock
+		moeda: in std_logic_vector(7 downto 0); -- entrada correspondente ao valor monetário
+		c: out std_logic; -- saída do detector de moedas
+		a: out std_logic_vector(7 downto 0) -- saida do registrador
 	);
+
 end bc;
 
 architecture comportamento of bc is
-	type tipo_estado is (S0, S1);
-	signal prox_estado, estado : tipo_estado := S0;
-begin
-	-- Circuito combinacional -> não depende de clock
-	logica_proximo_estado : process(estado, com_moeda)
+
+	type estados is (S0, S1); -- define os estados existentes no proximo
+
+	signal estado_atual, proximo_estado: estados := S0; -- cria um sinal para cada estado
+	signal com_moeda: std_logic := '0'; -- verifica se uma moeda foi inserida
+	
 	begin
-		case estado is
+
+	-- altera para o próximo estado quando o valor de c for modificado
+	logica_proximo_estado: process(estado_atual, com_moeda)
+	begin
+		case estado_atual is
 			when S0 =>
 				if com_moeda = '1' then
-					prox_estado <= S1;
+					proximo_estado <= S1; 
 				else
-					prox_estado <= S0;
+					proximo_estado <= S0;
 				end if;
-			when S1 => 
+			when S1 =>
 				if com_moeda = '0' then
-					prox_estado <= S0;
+					proximo_estado <= S0;
 				else
-					prox_estado <= S1;
+					proximo_estado <= S1;	
 				end if;
 		end case;
 	end process;
-	
-	registrador_estado : process(clk, reset)
+	-- processo responsável por modificar o valor do sinal 
+	detector_moeda: process(clock, moeda)
 	begin
-		if reset = '1' then
-			estado <= S0;
-		elsif rising_edge(clk) then
-			estado <= prox_estado;
+		if rising_edge(clock) then
+			com_moeda <= '1';	
 		end if;
 	end process;
-	
-	-- Circuito combinacional -> não depende de clock
-	logica_saida : process(estado)
+	-- processo responsavel pela mudança de estado
+	registrador_estado: process(clock, reset)
+	begin 
+		if reset = '1' then
+			estado_atual <= S0;
+		elsif rising_edge(clock) then
+			estado_atual <= proximo_estado;
+		end if;
+	end process;
+	-- passa o valor numerico para a saida 
+	registrador_saida: process(clock, estado_atual)
 	begin
-		case estado is
+		case estado_atual is
 			when S0 =>
-				pronto <= '0';
-			when S1 =>
-				pronto <= '1';
+				c <= '0';
+			when S1 => 
+				if rising_edge(clock) then
+					a <= moeda;
+					c <= com_moeda;
+				end if;
 		end case;
 	end process;
-	
-end architecture;
+
+end comportamento;
