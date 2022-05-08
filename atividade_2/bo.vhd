@@ -21,11 +21,11 @@ end bo;
 architecture comportamento of bo is
 	signal reg_output : std_logic_vector(nbits - 1 downto 0);
 	signal alu_output : std_logic_vector(nbits - 1 downto 0);
-	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "00000000"; -- o valor de S
+	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "1100100"; -- 100 centavos
 	signal mux_output : std_logic_vector(nbits - 1 downto 0);
 begin
 	--multiplexador
-	mux_output <= a when ie = '1' else "00000001";
+	mux_output <= a when ie = '1' else "00000000";
 
 	--ALU
 	process(mux_output, reg_output, alu)
@@ -54,6 +54,8 @@ begin
 		if rising_edge(clk) then
 			if alu_output = "00000001" then
 				liberado <= '1';
+			else 
+				liberado <= '0';
 			end if;
 		end if;
 	end process;
