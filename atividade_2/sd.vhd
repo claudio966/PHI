@@ -4,7 +4,11 @@ use ieee.numeric_std.all;
 
 entity sd is
 	port(
-		clk : in std_logic
+		clk: in std_logic;
+		liberado: out std_logic;
+		alu : in std_logic_vector(1 downto 0);
+		reg_clear, ie : in std_logic;
+		moeda : in std_logic_vector(7 downto 0)
 	);
 end sd;
 
@@ -19,6 +23,9 @@ architecture estrutura of sd is
 	);
 	end component;
 	
+	signal reset, c: std_logic;
+	signal a : std_logic_vector(7 downto 0);
+
 	component bo
 	port(
 		clk : in std_logic;
@@ -29,9 +36,6 @@ architecture estrutura of sd is
 		alu : in std_logic_vector(1 downto 0)
 	);
 	end component;
-	signal c, reg_clear, ie, reset, liberado : std_logic;
-	signal a, moeda: std_logic_vector(7 downto 0);
-	signal alu: std_logic_vector(1 downto 0);
 begin
 	fsm : bc
 	port map(
@@ -45,10 +49,10 @@ begin
 	datapath : bo
 	port map(
 		clk => clk,
-		c => c,
-		a => a,
 		reg_clear => reg_clear,
 		alu => alu,
+		c => c,
+		a => a,
    	liberado => liberado,
 		ie => ie
 	);
