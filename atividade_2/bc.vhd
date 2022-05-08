@@ -62,6 +62,7 @@ architecture comportamento of bc is
 	begin
 		case estado_atual is
 			when S0 =>
+				a <= "00000000";
 				c <= '0';
 			when S1 => 
 				if rising_edge(clock) then
