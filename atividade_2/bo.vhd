@@ -52,7 +52,7 @@ begin
 	liberar_item: process(clk)
 	begin
 		if rising_edge(clk) then
-			if alu_output = "00000001" then
+			if reg_output = "00000001" then
 				liberado <= '1';
 			else 
 				liberado <= '0';
