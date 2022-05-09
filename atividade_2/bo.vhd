@@ -19,7 +19,7 @@ entity bo is
 end bo;
 
 architecture comportamento of bo is
-	signal reg_output : std_logic_vector(nbits - 1 downto 0);
+	signal reg_output : std_logic_vector(nbits - 1 downto 0) := "00000000";
 	signal alu_output : std_logic_vector(nbits - 1 downto 0);
 	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "01100100"; -- 100 centavos
 	signal mux_output : std_logic_vector(nbits - 1 downto 0);
@@ -38,7 +38,7 @@ begin
 			when "10" =>
 				alu_output <= std_logic_vector(signed(mux_output) - signed(reg_output));
 			when "11" =>
-				if signed(reg_output) >= signed(item_preco) then
+				if signed(a) >= signed(item_preco) then
 					alu_output <= "00000001";
 				else
 					alu_output <= "00000000";
