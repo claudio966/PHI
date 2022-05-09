@@ -21,7 +21,7 @@ end bo;
 architecture comportamento of bo is
 	signal reg_output : std_logic_vector(nbits - 1 downto 0);
 	signal alu_output : std_logic_vector(nbits - 1 downto 0);
-	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "1100100"; -- 100 centavos
+	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "01100100"; -- 100 centavos
 	signal mux_output : std_logic_vector(nbits - 1 downto 0);
 begin
 	--multiplexador
