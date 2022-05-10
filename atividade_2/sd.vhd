@@ -6,7 +6,6 @@ entity sd is
 	port(
 		clk: in std_logic;
 		liberado: out std_logic;
-		alu : in std_logic_vector(1 downto 0);
 		reg_clear, ie : in std_logic;
 		moeda : in std_logic_vector(7 downto 0)
 	);
@@ -32,8 +31,7 @@ architecture estrutura of sd is
 		reg_clear, ie : in std_logic;
 		liberado: out std_logic;
 		c: in std_logic;
-		a : in std_logic_vector(7 downto 0);
-		alu : in std_logic_vector(1 downto 0)
+		a : in std_logic_vector(7 downto 0)
 	);
 	end component;
 begin
@@ -50,7 +48,6 @@ begin
 	port map(
 		clk => clk,
 		reg_clear => reg_clear,
-		alu => alu,
 		c => c,
 		a => a,
    	liberado => liberado,
