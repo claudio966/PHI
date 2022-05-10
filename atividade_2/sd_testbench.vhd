@@ -8,21 +8,20 @@ end sd_testbench;
 architecture testbench of sd_testbench is
 	component sd
 		port(
-			clk : in std_logic := '0';
-			reg_clear : in std_logic := '0';
-			moeda : in std_logic_vector(7 downto 0) := "11000000";	
-			alu : in std_logic_vector(1 downto 0) := "11";	
-			ie : in std_logic := '1';
+			clk : in std_logic;
+			reg_clear : in std_logic;
+			moeda : in std_logic_vector(7 downto 0);	
+			--alu : in std_logic_vector(1 downto 0);	
+			ie : in std_logic;
 			liberado : out std_logic
 		);
 	end component;
 
-	signal clk : std_logic := '0';
+	signal clk : std_logic := '1';
 	signal reg_clear : std_logic := '0';
-	signal moeda : std_logic_vector(7 downto 0) := "11000000";
-	signal alu: std_logic_vector(1 downto 0) := "11";
+	signal moeda : std_logic_vector(7 downto 0) := "00011001";
 	signal ie: std_logic := '1';
-	signal liberado: std_logic;
+	signal liberado: std_logic := '0';
 	
 begin
 	clk <= '1' after 0.5 ns when clk = '0' else
@@ -48,7 +47,6 @@ begin
 		clk => clk,
 		reg_clear => reg_clear,
 		moeda => moeda,
-		alu => alu,
 		ie => ie,
 		liberado => liberado
 	);
