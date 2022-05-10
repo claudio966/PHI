@@ -11,7 +11,6 @@ architecture testbench of sd_testbench is
 			clk : in std_logic;
 			reg_clear : in std_logic;
 			moeda : in std_logic_vector(7 downto 0);	
-			--alu : in std_logic_vector(1 downto 0);	
 			ie : in std_logic;
 			liberado : out std_logic
 		);
@@ -26,21 +25,6 @@ architecture testbench of sd_testbench is
 begin
 	clk <= '1' after 0.5 ns when clk = '0' else
 		'0' after 0.5 ns when clk ='1';
-	
-	--inicio <= '1' after 2 us;
-	
---	process
---	begin
---		
---		inicio <= '1';
---				inicio <= not inicio;
---		wait until rising_edge(clk);
---		wait until rising_edge(clk);
---		wait until rising_edge(clk);
---		wait until rising_edge(clk);
---		inicio <= not inicio;
---		wait;
---	end process;
 	
 	sd_test: sd
 	port map(
