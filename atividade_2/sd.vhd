@@ -14,6 +14,7 @@ end sd;
 architecture estrutura of sd is
 	component bc
 	port(
+		reset_state: in std_logic;
 		reset, clk : in std_logic;
 		c : out std_logic; -- saida do detector de moedas
 		moeda : in std_logic_vector(7 downto 0);
@@ -22,11 +23,13 @@ architecture estrutura of sd is
 	);
 	end component;
 	
+	signal reset_state: std_logic;
 	signal reset, c: std_logic;
 	signal a : std_logic_vector(7 downto 0);
 
 	component bo
 	port(
+		reset_state: out std_logic;
 		clk : in std_logic;
 		reg_clear, ie : in std_logic;
 		liberado: out std_logic;
@@ -37,6 +40,7 @@ architecture estrutura of sd is
 begin
 	fsm : bc
 	port map(
+		reset_state => reset_state,
 		clk => clk,
 		reset => reset,
 		c => c,
@@ -46,6 +50,7 @@ begin
 	
 	datapath : bo
 	port map(
+		reset_state => reset_state,
 		clk => clk,
 		reg_clear => reg_clear,
 		c => c,

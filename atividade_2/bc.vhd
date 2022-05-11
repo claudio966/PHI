@@ -5,6 +5,7 @@ use ieee.std_logic_1164.all;
 entity bc is
 
 	port(
+		reset_state: in std_logic := '1';
 		reset: in std_logic := '0'; -- entrada de reset
 		clk: in std_logic; -- entrada de clk
 		moeda: in std_logic_vector(7 downto 0); -- entrada correspondente ao valor monetário
@@ -24,7 +25,7 @@ architecture comportamento of bc is
 	begin
 
 	-- altera para o próximo estado quando o valor de c for modificado
-	logica_proximo_estado: process(estado_atual, com_moeda)
+	logica_proximo_estado: process(estado_atual, com_moeda, reset_state)
 	begin
 		case estado_atual is
 			when S0 =>
@@ -34,7 +35,9 @@ architecture comportamento of bc is
 					proximo_estado <= S0;
 				end if;
 			when S1 =>
-				if com_moeda = '0' then
+				if reset_state = '0' then
+					proximo_estado <= S0;
+				elsif com_moeda = '0' then
 					proximo_estado <= S0;
 				else
 					proximo_estado <= S1;	
@@ -71,5 +74,4 @@ architecture comportamento of bc is
 				end if;
 		end case;
 	end process;
-
 end comportamento;
