@@ -10,7 +10,7 @@ entity bo is
 	port (
 		clk : in std_logic;
 		c : in std_logic; -- Entrada da moeda detectada
-		reg_clear : in std_logic;
+		reset : in std_logic;
 		a : in std_logic_vector(nbits - 1 downto 0); -- Saida do registrado de BC
 		--alu : in std_logic_vector(1 downto 0);
 		liberado : out std_logic := '0'; -- o valor de d
@@ -57,7 +57,7 @@ begin
 	registrador_op: process(clk)
 	begin
 		if rising_edge(clk) then
-			if reg_clear = '1' then
+			if reset = '1' then
 				reg_output <= (others => '0');
 			elsif c = '1' then
 				reg_output <= alu_output;
