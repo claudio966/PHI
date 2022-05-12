@@ -20,6 +20,7 @@ entity bo is
 end bo;
 
 architecture comportamento of bo is
+	signal item : std_logic := '0';
 	signal reg_output : std_logic_vector(nbits - 1 downto 0) := "00000000";
 	signal alu_output : std_logic_vector(nbits - 1 downto 0) := "11111111";
 	signal item_preco : std_logic_vector(nbits - 1 downto 0) := "01100100"; -- 100 centavos
@@ -36,7 +37,8 @@ begin
 		end if;
 		
 		if reg_output >= item_preco then
-			alu_output <= "00000000";
+			alu_output <= std_logic_vector(unsigned(reg_output) - unsigned(item_preco));
+			item <= '1';
 		elsif reg_output = "00000000" then
 			reset_state <= '0';
 		end if;
@@ -46,7 +48,7 @@ begin
 	liberar_item: process(clk)
 	begin
 		if falling_edge(clk) then
-			if alu_output = "00000000" then
+			if item = '1' then
 				liberado <= '1';
 			else 
 				liberado <= '0';
