@@ -5,8 +5,7 @@ use ieee.std_logic_1164.all;
 entity bc is
 
 	port(
-		reset_state: in std_logic;
-		reset: in std_logic := '0'; -- entrada de reset
+		reset: in std_logic;
 		clk: in std_logic; -- entrada de clk
 		moeda: in std_logic_vector(7 downto 0); -- entrada correspondente ao valor monetário
 		c: out std_logic; -- saída do detector de moedas
@@ -21,11 +20,10 @@ architecture comportamento of bc is
 
 	signal estado_atual, proximo_estado: estados := S0; -- cria um sinal para cada estado
 	signal com_moeda: std_logic := '0'; -- verifica se uma moeda foi inserida
-	signal reset_signal: std_logic := '1'; -- sinal para forçar a volta do automato ao estado anterior
 	begin
 
 	-- altera para o próximo estado quando o valor de c for modificado
-	logica_proximo_estado: process(estado_atual, com_moeda, reset_state)
+	logica_proximo_estado: process(estado_atual, com_moeda, reset)
 	begin
 		case estado_atual is
 			when S0 =>
@@ -35,9 +33,8 @@ architecture comportamento of bc is
 					proximo_estado <= S0;
 				end if;
 			when S1 =>
-				if reset_signal = '0' then
+				if reset = '1' then
 					proximo_estado <= S0;
-					reset_signal <= '1';
 				elsif com_moeda = '0' then
 					proximo_estado <= S0;
 				else
@@ -53,11 +50,9 @@ architecture comportamento of bc is
 		end if;
 	end process;
 	-- processo responsavel pela mudança de estado
-	registrador_estado: process(clk, reset)
+	registrador_estado: process(clk)
 	begin 
-		if reset = '1' then
-			estado_atual <= S0;
-		elsif rising_edge(clk) then
+		if rising_edge(clk) then
 			estado_atual <= proximo_estado;
 		end if;
 	end process;
@@ -74,9 +69,5 @@ architecture comportamento of bc is
 					c <= com_moeda;
 				end if;
 		end case;
-	end process;
-	checar_reset: process(reset_state)
-	begin
-		reset_signal <= reset_state;
 	end process;
 end comportamento;

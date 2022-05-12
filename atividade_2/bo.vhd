@@ -14,7 +14,6 @@ entity bo is
 		a : in std_logic_vector(nbits - 1 downto 0); -- Saida do registrado de BC
 		--alu : in std_logic_vector(1 downto 0);
 		liberado : out std_logic := '0'; -- o valor de d
-		reset_state: out std_logic := '1';
 		ie : in std_logic
 	);
 end bo;
@@ -39,8 +38,6 @@ begin
 		if reg_output >= item_preco then
 			alu_output <= std_logic_vector(unsigned(reg_output) - unsigned(item_preco));
 			item <= '1';
-		elsif reg_output = "00000000" then
-			reset_state <= '0';
 		end if;
 	end process;	
 	
