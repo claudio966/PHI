@@ -38,6 +38,8 @@ begin
 		if reg_output >= item_preco then
 			alu_output <= std_logic_vector(unsigned(reg_output) - unsigned(item_preco));
 			item <= '1';
+		else 
+			item <= '0';
 		end if;
 	end process;	
 	
